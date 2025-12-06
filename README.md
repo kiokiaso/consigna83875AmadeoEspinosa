@@ -11,7 +11,7 @@ Para la instalación debes seguir los siguientes pasos
 git https://github.com/kiokiaso/consigna83875AmadeoEspinosa.git
 cd consigna83875AmadeoEspinosa
 npm install
-npm run dev
+npx expo start
 ```
 
 ## Características
