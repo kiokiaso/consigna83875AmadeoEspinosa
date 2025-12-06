@@ -6,6 +6,7 @@ import userReducer from '../features/user/userSlice'
 import {userApi} from "../services/userService"
 import {prospectoApi} from "../services/prospectoService"
 import prospectoReducer from "../features/prospecto/prospectoSlice"
+import { obtenerProspectoApi } from "../services/obtenerProspecto";
 
 export const store=configureStore({
     reducer:{
@@ -16,9 +17,10 @@ export const store=configureStore({
         [authApi.reducerPath]:authApi.reducer,
         [userApi.reducerPath]:userApi.reducer,
         [prospectoApi.reducerPath]:prospectoApi.reducer,
+        [obtenerProspectoApi.reducerPath]:obtenerProspectoApi.reducer,
     },
     middleware:(getDefaultMiddleware)=>
-        getDefaultMiddleware().concat(authApi.middleware).concat(userApi.middleware).concat(prospectoApi.middleware)
+        getDefaultMiddleware().concat(authApi.middleware).concat(userApi.middleware).concat(prospectoApi.middleware).concat(obtenerProspectoApi.middleware)
 })
 
 

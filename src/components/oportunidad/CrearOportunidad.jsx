@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Component, DecimalsArrowRight } from "lucide-react-native";
+import { Component, DecimalsArrowRight,Info } from "lucide-react-native";
 import { useDispatch } from "react-redux";
 import { usePutProspectoMutation } from "../../../services/prospectoService";
 import Toast from 'react-native-toast-message'
@@ -197,11 +197,10 @@ const CrearOportunidad = ({ navigation, route }) => {
                     <View style={{ marginBottom: 20 }}>
                         <Text style={styles.nombreCampo}>Observaciones</Text>
                         <View style={styles.viewInput} >
-                            <DecimalsArrowRight color="#cbd5e1" size={20} />
+                            <Info color="#cbd5e1" size={20} style={{ marginTop: 12 }} />
                             <TextInput
                                 placeholder="Escribe las observaciones"
                                 placeholderTextColor="#000"
-                                keyboardType="phone-pad"
                                 style={styles.campoInput}
                                 value={form.observaciones}
                                 onChangeText={(v) => handleChange("observaciones", v)}

@@ -9,7 +9,7 @@ import { usePostProspectoMutation } from "../../../services/prospectoService";
 import Toast from 'react-native-toast-message'
 import { addProspecto } from "../../../features/prospecto/prospectoSlice";
 
-const AgregarProspecto = ({ cambiarPrincipal, localId }) => {
+const AgregarProspecto = ({ cambiarPrincipal, localId, navigation}) => {
     const [form, setForm] = useState({ empresa: "", domicilio: "", email: "", telefono: "", observaciones: "", contacto: "" });
     const dispatch = useDispatch()
     const [triggerPostProspecto, result] = usePostProspectoMutation()
@@ -33,10 +33,13 @@ const AgregarProspecto = ({ cambiarPrincipal, localId }) => {
         });
         const altaProspecto={localId,empresa:form.empresa,domicilio:form.domicilio,contacto:form.contacto,telefono:form.contacto,email:form.email,observaciones:form.observaciones,estado:'Prospecto',fecha:new Date().toISOString()}
         const res=triggerPostProspecto(altaProspecto)
-        
+        console.log("---------res agregar Prospecto ---------")
+        console.log(res)
         altaProspecto.id=res.requestId
         dispatch(addProspecto(altaProspecto))
-        cambiarPrincipal()
+        navigation.navigate("Home")
+        //navigation.navigate("DetalleProspecto",{item:route.params.item})
+        //cambiarPrincipal()
     }
     return (
 
@@ -155,7 +158,7 @@ const AgregarProspecto = ({ cambiarPrincipal, localId }) => {
                         }}
                     >
                         <Text style={{ color: "#000", fontSize: 18, fontWeight: "700", }}>
-                            Guardar cambios
+                            Agregar
                         </Text>
                     </TouchableOpacity>
 

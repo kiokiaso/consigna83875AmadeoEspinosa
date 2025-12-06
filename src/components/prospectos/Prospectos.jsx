@@ -12,6 +12,8 @@ export default function Prospectos({navigation }) {
     //const { data, isLoading, error } = useGetProspectosQuery();
     
         const datos=useSelector(state=>state.prospectoReducer.lista)
+        console.log("---------------------------------------------------")
+        console.log(datos)
         const data=datos.filter(u=>u.estado==="Prospecto")
 
     const cambiarPrincipal = () => {
@@ -24,7 +26,7 @@ export default function Prospectos({navigation }) {
             {
                 principal ?
                     (<Principal cambiarPrincipal={cambiarPrincipal} localId={localId} data={data} navigation={navigation} />) :
-                    (<AgregarProspecto cambiarPrincipal={cambiarPrincipal} localId={localId} />)
+                    (<AgregarProspecto cambiarPrincipal={cambiarPrincipal} navigation={navigation} localId={localId} />)
             }
             <View>
 

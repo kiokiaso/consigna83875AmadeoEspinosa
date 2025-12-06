@@ -1,22 +1,27 @@
-import {StyleSheet,Text,TextInput,Pressable,Dimensions,View} from 'react-native'
+import { StyleSheet, Text, TextInput, Pressable, Dimensions, View } from 'react-native'
 //import {colors} from "../../theme/colors"
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useLoginMutation } from '../../services/authService'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../../features/auth/authSlice'
 import { useSQLiteContext } from 'expo-sqlite'
 import Toast from 'react-native-toast-message'
+//import { useGetProspectosQuery } from "../../services/prospectoService"
+import { setProspecto } from "../../features/prospecto/prospectoSlice"
 
-const textInputWidth=Dimensions.get('window').width*0.7
+const textInputWidth = Dimensions.get('window').width * 0.7
 
-const LoginScreen=({navigation})=>{
-    const db=useSQLiteContext()
-    const [email,setEmail]=useState("");
-    const [password,setPassword]=useState("");
-    const dispatch=useDispatch()
-    const [triggerLogin,result]=useLoginMutation()
-    
-    const onSubmit=()=>{
+const LoginScreen = ({ navigation }) => {
+    const db = useSQLiteContext()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch()
+    const [triggerLogin, result] = useLoginMutation()
+    const [us, setUs] = useState(false)
+    //const { data: prospectos, isLoadingPros, errorPros } = useGetProspectosQuery()
+   
+
+    const onSubmit = async () => {
         if (!email.trim()) {
             Toast.show({
                 type: "error",
@@ -34,66 +39,75 @@ const LoginScreen=({navigation})=>{
             });
             return;
         }
-        triggerLogin({email,password})
+        triggerLogin({ email, password })
+        dispatch(setUser(result.data))
+        console.log("---------desdelogin-----")
+        //rconsole.log(prospectos)
+            //const resultado = prospectos.filter(u => u.localId === result.data.localId)
+            //dispatch(setProspecto(resultado))
+        await saveUserInDB(result.data.email, result.data.localId)
+        
+        
+
+
     }
 
-    useEffect(()=>{
-        async function setup(){
+    useEffect(() => {
+        async function setup() {
             const result = await db.getFirstAsync("SELECT * FROM sessions")
-            console.log("Usuarios en db: ",result)
-            if(result.email){
-                dispatch(setUser({email:result.email,localId:result.localId}))
+            //console.log("Usuarios en db: ",result)
+            if (result.email) {
+                dispatch(setUser({ email: result.email, localId: result.localId }))
+                setUs(true)
             }
         }
         setup()
-    },[])
-    
-    const saveUserInDB=async (email,localId)=>{
+    }, [])
+
+    const saveUserInDB = async (email, localId) => {
         try {
-            const result=await db.runAsync("INSERT INTO sessions (email,localId) VALUES(?,?)",email,localId)
-            console.log("Usuario agregado correctamente a la base de datos")
+            const result = await db.runAsync("INSERT INTO sessions (email,localId) VALUES(?,?)", email, localId)
         } catch (error) {
-            console.log("Error al cargar el usuario en la bd:",error)
+            console.log("Error al cargar el usuario en la bd:", error)
         }
     }
-
-    useEffect(()=>{
-        async function saveUser(){
-            if(result.status=="fulfilled"){
+    useEffect(() => {
+        async function saveUser() {
+            if (result.status == "fulfilled") {
                 dispatch(setUser(result.data))
-                await saveUserInDB(result.data.email,result.data.localId)
-                 Toast.show({
+                await saveUserInDB(result.data.email, result.data.localId)
+                Toast.show({
                     type: "success",
                     text1: "Bienvenido",
                     text2: result.data.email,
                 });
-            }else{
+            } else {
                 Toast.show({
                     type: "error",
                     text1: "Error",
                     text2: "El usuarios o contraseña son incorrectos",
                 });
-               // console.log("Se produjo un error al iniciar sesión")
+                // console.log("Se produjo un error al iniciar sesión")
             }
         }
         saveUser()
-    },[result])
-    
-    return(
+    }, [result])
+
+    return (
         <View style={styles.container}>
             <Text style={styles.title}>Seguimiento ventas</Text>
             <Text style={styles.subTitle}>Inicio de sesión</Text>
             <View style={styles.inputContainer}>
-                <TextInput 
-                    onChangeText={(text)=>setEmail(text)}
+                <TextInput
+                    onChangeText={(text) => setEmail(text)}
                     placeholderTextColor="#000"
                     placeholder='Email'
                     style={styles.textInput}
-                    keyBoardType="email-address"
+                    keyboardType="email-address"
                     autoCapitalize="none"
                 />
-                <TextInput 
-                    onChangeText={(text)=>setPassword(text)}
+                <TextInput
+                    onChangeText={(text) => setPassword(text)}
                     placeholderTextColor="#000"
                     placeholder='Password'
                     style={styles.textInput}
@@ -102,7 +116,7 @@ const LoginScreen=({navigation})=>{
             </View>
             <View style={styles.footTextContainer}>
                 <Text style={styles.whiteText}>¿No tienes una cuenta?</Text>
-                <Pressable onPress={()=>navigation.navigate('Signup')}>
+                <Pressable onPress={() => navigation.navigate('Signup')}>
                     <Text style={
                         {
                             ...styles.whiteText,
@@ -122,68 +136,68 @@ export default LoginScreen
 
 
 
-const styles=StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:"#0067c6"
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#0067c6"
     },
-    title:{
-        color:"#000",
-        fontFamily:"PressStart2P",
-        fontSize:24,
-        fontWeight:'900',
+    title: {
+        color: "#000",
+        fontFamily: "PressStart2P",
+        fontSize: 24,
+        fontWeight: '900',
     },
-    subTitle:{
-        fontFamily:"Montserrat",
-        fontSize:18,
-        color:"#a0ad2cff",
-        fontWeight:'700',
-        letterSpacing:3
+    subTitle: {
+        fontFamily: "Montserrat",
+        fontSize: 18,
+        color: "#a0ad2cff",
+        fontWeight: '700',
+        letterSpacing: 3
     },
-    inputContainer:{
-        gap:16,
-        margin:16,
-        marginTop:48,
-        alignItems:'center',
+    inputContainer: {
+        gap: 16,
+        margin: 16,
+        marginTop: 48,
+        alignItems: 'center',
     },
-    textInput:{
-        padding:10,
-        paddingLeft:16,
-        borderRadius:16,
-        backgroundColor:"#FFF",
-        width:textInputWidth,
-        color:"#000"
+    textInput: {
+        padding: 10,
+        paddingLeft: 16,
+        borderRadius: 16,
+        backgroundColor: "#FFF",
+        width: textInputWidth,
+        color: "#000"
     },
-    footTextContainer:{
-        flexDirection:'row',
-        gap:8
+    footTextContainer: {
+        flexDirection: 'row',
+        gap: 8
     },
-    whiteText:{
-        color:"#FFF"
+    whiteText: {
+        color: "#FFF"
     },
-    underLineText:{
-        textDecorationColor:'underline'
+    underLineText: {
+        textDecorationColor: 'underline'
     },
-    strongText:{
-        fontWeight:'900',
-        fontSize:16
+    strongText: {
+        fontWeight: '900',
+        fontSize: 16
     },
-    btn:{
-        padding:16,
-        paddingHorizontal:32,
-        backgroundColor:"#9c1375ff",
-        borderRadius:16,
-        marginTop:32
+    btn: {
+        padding: 16,
+        paddingHorizontal: 32,
+        backgroundColor: "#9c1375ff",
+        borderRadius: 16,
+        marginTop: 32
     },
-    btnText:{
-        color:"#FFF",
-        fontSize:16,
-        fontWeight:'700'
+    btnText: {
+        color: "#FFF",
+        fontSize: 16,
+        fontWeight: '700'
     },
-    guestOptionContainer:{
-        alignItems:'center',
-        marginTop:64
+    guestOptionContainer: {
+        alignItems: 'center',
+        marginTop: 64
     }
 })

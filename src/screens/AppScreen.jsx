@@ -21,6 +21,7 @@ import CrearCliente from '../components/cliente/CrearCliente';
 import DetalleCliente from '../components/cliente/DetalleCliente';
 import UbicacionCliente from '../components/cliente/UbicacionCliente';
 import EditarCliente from '../components/cliente/EditarCliente';
+import Datos from '../components/sincronizar/Datos';
 
 
 const Stack = createNativeStackNavigator();
@@ -54,6 +55,7 @@ export default function AppScreen() {
             <Stack.Screen name="DetalleCliente" component={DetalleCliente}  options={{ headerShown: false }} />
             <Stack.Screen name="UbicacionCliente" component={UbicacionCliente}  options={{ headerShown: false }} />
             <Stack.Screen name="EditarCliente" component={EditarCliente}  options={{ headerShown: false }} />
+            <Stack.Screen name="SincronizarDatos" component={Datos}  options={{ headerShown: false }} />
 
 
             {isAdmin && (

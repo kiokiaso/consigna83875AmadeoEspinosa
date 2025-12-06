@@ -4,10 +4,12 @@ export const prospectoSlice = createSlice({
   name: "prospecto",
   initialState: {
     lista: [],
+    lastSync:null,
   },
   reducers: {
     setProspecto: (state, action) => {
       state.lista = action.payload;
+      state.lastSyncAt = Date.now();
     },
     addProspecto: (state, action) => {
       state.lista.push(action.payload);
@@ -24,11 +26,12 @@ export const prospectoSlice = createSlice({
         };
       }
     },
-    /*updateProspecto:(state,action)=>{
-            const {id,data}=action.payload
-        }*/
+    limpiarLista: (state) => {
+      state.lista = [];
+      state.lastSyncAt = null;
+    }
   },
 });
 
-export const { setProspecto, addProspecto,actualizarProspecto } = prospectoSlice.actions;
+export const { setProspecto, addProspecto,actualizarProspecto,limpiarLista } = prospectoSlice.actions;
 export default prospectoSlice.reducer;

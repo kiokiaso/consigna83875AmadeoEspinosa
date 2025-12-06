@@ -279,11 +279,10 @@ const EditarOportunidad = ({ navigation, route }) => {
                     <View style={{ marginBottom: 20 }}>
                         <Text style={styles.nombreCampo}>Observaciones</Text>
                         <View style={styles.viewInput} >
-                            <DecimalsArrowRight color="#cbd5e1" size={20} />
+                            <Info color="#cbd5e1" size={20} style={{ marginTop: 12 }} />
                             <TextInput
                                 placeholder="Escribe las observaciones"
                                 placeholderTextColor="#000"
-                                keyboardType="phone-pad"
                                 style={styles.campoInput}
                                 value={form.observaciones}
                                 onChangeText={(v) => handleChange("observaciones", v)}

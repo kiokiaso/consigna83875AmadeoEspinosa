@@ -13,6 +13,9 @@ export default function Principal({ cambiarPrincipal, localId,data,navigation}) 
    const [datos,setDatos]=useState(data);
    //const [busca,setBusca]=useState("")
    //const [datos,setDatos]=useState(data)
+
+    console.log("-------data-----")
+    console.log(datos)
     const activarBuscar=()=>{
         setSearch((prev) => !prev)
     }
@@ -22,7 +25,7 @@ export default function Principal({ cambiarPrincipal, localId,data,navigation}) 
                 String(value).toLowerCase().includes(val.toLowerCase())
             ));
             setDatos(filtrados)
-        console.log("Filtro: ",filtrados)
+        //console.log("Filtro: ",filtrados)
     }
 
     return (
@@ -123,6 +126,7 @@ const styles = StyleSheet.create({
     container: {
         width: '95%',
         backgroundColor: "#F5F6FA",
+        marginTop:30
     },
     content: {
         padding: 20,

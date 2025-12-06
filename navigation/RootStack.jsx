@@ -5,14 +5,11 @@ import AuthNavigator from "./AuthNavigator"
 import { useGetProfilePictureQuery } from "../services/userService"
 import { useEffect } from "react"
 import { setProfilePicture,setProfile } from "../features/user/userSlice"
-import { useGetProspectosQuery } from "../services/prospectoService"
-import { setProspecto } from "../features/prospecto/prospectoSlice"
 
 const RootStack =()=>{
     const user =useSelector(state=>state.authReducer.value.email)
     const localId=useSelector(state=>state.authReducer.value.localId)
     const {data:profilePicture,isLoading,error} = useGetProfilePictureQuery(localId)
-    const {data:prospectos,isLoadingPros,errorPros} = useGetProspectosQuery()
     const dispatch=useDispatch()
     useEffect(()=>{
         if(profilePicture){
@@ -26,13 +23,7 @@ const RootStack =()=>{
             
         }
     },[profilePicture])
-    useEffect(()=>{
-        if(prospectos){
-            const resultado=prospectos.filter(u=>u.localId===localId)
-            dispatch(setProspecto(resultado))
-           
-        }
-    },[prospectos])
+    
      
     return(
         <NavigationContainer>

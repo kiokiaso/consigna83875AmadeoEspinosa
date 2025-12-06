@@ -13,7 +13,7 @@ const CrearCliente = ({ navigation, route }) => {
     const dispatch = useDispatch()
     const [triggerPutOportunidad, result] = usePutProspectoMutation()
     const [tipo, setTipo] = useState(route.params.item.tipo)
-    const [estado, setEstado] = useState(route.params.item.estado)
+    const [estado, setEstado] = useState(route.params.item.estadoOportunidad)
     const [tamano, setTamano] = useState(route.params.item.tamano)
     const [marca, setMarca] = useState(route.params.item.marca)
     const [tipoMFP, setTipoMFP] = useState(route.params.item.tipoMFP)

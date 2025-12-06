@@ -14,16 +14,36 @@ npm install
 npm run dev
 ```
 
-## Librerías
-- [React-native](https://es.react.dev/): Utilizada para mejorar la experiencia del usuario y la velocidad de carga
-- [vector-icons](https://react-bootstrap.netlify.app/): Es utilizada para dar un estilo más amigable para el usuario
-- [firebase](https://firebase.google.com/): Almacena la base de datos
-- [react-navigation](https://www.npmjs.com/package/react-router-dom): Sirve para tener la navegación dentro de la página sin tener que recargar
-- [redux/toolkit]() : Es utilzada para hacer persistencia de los datos
-- [expo]() :Se utiliza para una facil integración de IOs y Android
-- [expo-camera]() :Sirve para hacer uso de la cámara
-- [expo-file-system]() : Nos sirve para el manejo de los archivos
-- [expo-linear-gradient]() : nor sirve para 
+## Características
+- Fácil de usar
+- Interfaz amigable
+- Soporte multiplataforma
+- Para poder ver el mapa en el app es necesario tener una API de google, no incluida
+
+## Uso
+### Inicio de sesión y perfil
+- Debes tener una API de google y ponerla en al app.json en la parte de IOS y Android referente a la API
+- Primero se debe iniciar sesión, si no tienes un cuenta, te puedes registrar
+- Una vez iniciada la sesión, puedes agregar los datos de tu perfil, o modificar la imagen presionando en Cambia Foto
+### Prospectos
+- Para el buen funcionamiento del app, primero debes crear un prospecto, entrando a Prospectos
+- En este apartado te aparecerá la lista de prospectos, puedes regresar al Home, Agregar Prospecto o buscar y si ya tienes prospectos puedes ver el Detalle presionando en le ojito en cada fila
+- Para agregar un prospecto presionas en Agregar, llenas el formulario y das en Agregar
+- En el detalle de prospecto, puedes ver la información completa, además de, Editar la información, agregar una ubicación o Crear una oportunidad
+- Para Editar, presionas el botón Editar y llenas el formulario, después presionas en Guardar Cambios
+- Para agregar una oportunidad, presionas en Crear Oportunidad, llenas le formulario y das en Crear
+
+### Oportunidades
+- Presionas en el botón de Oportunidades de la pantalla principal
+- Muestra la lista igual que en prospectos, la diferencia de esta pantalla es que no puedes agregar oportunidades, lo demás, el funcionamiento es igual a prospectos.
+- La diferencia en Detalle de oportunidad es que puedes Crear una venta, para ello, presionas en Crear Venta y editas el formulario, una vez realizado esto, presionas en Crear
+
+### Cliente
+- Presionas en el botón clientes de la pantalla principal
+- Funciona de la misma forma que oportunidades, la diferencia es que no puedes crear ventas, tampoco oportunidades.
+
+### Cerrar sesión
+- Sirve para cerrar la sesión
 
 # 📦 Dependencias del Proyecto
 
@@ -54,9 +74,6 @@ Colección de íconos nativos con soporte para múltiples tipos de fuentes.
 🔗 https://github.com/calintamas/react-native-toast-message  
 Permite mostrar notificaciones tipo Toast en la aplicación.
 
-### **framer-motion**
-🔗 https://www.framer.com/motion/  
-Librería para animaciones avanzadas (principalmente web; algunas funciones aplican en React Native con worklets).
 
 ---
 
@@ -106,11 +123,6 @@ Permite usar la cámara del dispositivo para fotos o video.
 🔗 https://docs.expo.dev/versions/latest/sdk/filesystem/  
 Trabajar con archivos locales: leer, escribir, mover, borrar.
 
-### **expo-linear-gradient**
-🔗 https://docs.expo.dev/versions/latest/sdk/linear-gradient/  
-Permite crear fondos y vistas con gradientes.
-
----
 
 ## 🗄️ Almacenamiento y Bases de Datos
 
@@ -167,10 +179,6 @@ Selector tipo modal, ideal para listas de opciones en móviles.
 ## Licencia
 Es de libre uso y disponible para colaboración
 
-## Características
-- Fácil de usar
-- Interfaz amigable
-- Soporte multiplataforma
 
 ## Desarollo
 Amadeo Espinosa

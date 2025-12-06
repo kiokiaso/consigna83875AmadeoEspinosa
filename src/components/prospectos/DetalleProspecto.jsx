@@ -11,7 +11,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { ArrowBigLeft, Pencil } from "lucide-react-native";
 
 const DetalleProspecto = ({ route, navigation }) => {
-
+    console.log("---------------detalleprospecto--------")
+    console.log(route.params.item)
     const {
         id,
         empresa,

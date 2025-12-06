@@ -16,7 +16,7 @@ const EditarProspecto = ({ navigation, route }) => {
     const handleChange = (field, value) => {
         setForm({ ...form, [field]: value })
     }
-    const guardarProspecto = () => {
+    const guardarProspecto =async () => {
         Object.entries(form).forEach(([key, value]) => {
             //console.log(key,value)
             if (!value.trim()) {
@@ -30,7 +30,7 @@ const EditarProspecto = ({ navigation, route }) => {
 
         });
         //const altaProspecto = { localId, empresa: form.empresa, domicilio: form.domicilio, contacto: form.contacto, telefono: form.contacto, email: form.email, observaciones: form.observaciones, estado: 'Prospecto', fecha: new Date().toISOString() }
-        const res = triggerPostProspecto({
+        const res = await  triggerPostProspecto({
             id: route.params.item.id,
             campos:
             {
@@ -41,7 +41,9 @@ const EditarProspecto = ({ navigation, route }) => {
                 email: form.email,
                 observaciones: form.observaciones,
             }
-        })
+        }).unwrap()
+        console.log()
+        console.log(res);
         
 
        // altaProspecto.id = res.requestId

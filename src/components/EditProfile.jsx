@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 import { User, Mail, Phone, Info } from "lucide-react-native";
-import Icon from '@expo/vector-icons/MaterialIcons'
 import { setProfile } from "../../features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { usePutProfileSaveMutation } from "../../services/userService";

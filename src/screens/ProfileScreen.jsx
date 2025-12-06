@@ -3,6 +3,7 @@ import { StyleSheet,View, Pressable,Image,Text,TouchableOpacity } from "react-na
 import { useSelector,useDispatch } from "react-redux";
 import { setProfilePicture,setProfile } from "../../features/user/userSlice";
 import { clearUser } from '../../features/auth/authSlice'
+import { limpiarLista } from '../../features/prospecto/prospectoSlice'
 import { useSQLiteContext } from 'expo-sqlite'
 import { useEffect, useState,useRef } from "react";
 import {CameraView,useCameraPermissions} from 'expo-camera'
@@ -78,6 +79,7 @@ const ProfileScreen=()=>{
             try {
                 const resultado=await db.runAsync('DELETE FROM sessions WHERE localId=$localId',{$localId:localId})
                 dispatch(clearUser())
+                dispatch(limpiarLista()); 
             } catch (error) {
                 
             }
