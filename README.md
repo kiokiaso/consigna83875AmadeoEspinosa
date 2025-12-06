@@ -21,6 +21,9 @@ npm run dev
 - Para poder ver el mapa en el app es necesario tener una API de google, no incluida
 
 ## Uso
+### Requisito
+- Debes tener una API de google y ponerla en al app.json en la parte de IOS y Android referente a la API
+- Debes crear un proyecto en firebase authentication y real time database, poner la clave de API y ruta de base de datos en firebase.js en la carpeta service, en prospectoService.js
 ### Inicio de sesión y perfil
 - Debes tener una API de google y ponerla en al app.json en la parte de IOS y Android referente a la API
 - Primero se debe iniciar sesión, si no tienes un cuenta, te puedes registrar
